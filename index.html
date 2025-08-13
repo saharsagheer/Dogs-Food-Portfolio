@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Food Portfolio</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background: #ffb347;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            color: #fff;
+            font-size: 2.5em;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .about, .contact {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            width: 300px;
+            padding: 18px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px) scale(1.03);
+        }
+        .product-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        .product-card h3 {
+            margin: 15px 0 10px 0;
+        }
+        .product-card p {
+            font-size: 0.97em;
+            color: #666;
+        }
+        .product-card button {
+            margin-top: 10px;
+            padding: 8px 18px;
+            background: #ffb347;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .product-card button:hover {
+            background: #ff9800;
+        }
+        .contact input, .contact textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 16px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .contact button {
+            background: #ffb347;
+            color: #fff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .contact button:hover {
+            background: #ff9800;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 18px 0;
+            margin-top: 40px;
+        }
+        @media (max-width: 900px) {
+            .products {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Dog Food Portfolio</h1>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#products">Products</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    <div class="container">
+        <section id="about" class="about">
+            <h2>About Us</h2>
+            <p>
+                Welcome to Dog Food Portfolio! We are passionate about providing healthy, nutritious, and delicious food for your furry friends. Our products are made from high-quality ingredients to ensure your dog's well-being and happiness.
+            </p>
+        </section>
+        <section id="products">
+            <h2>Our Products</h2>
+            <div class="products" id="product-list">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </section>
+        <section id="contact" class="contact">
+            <h2>Contact Us</h2>
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <textarea id="message" rows="4" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <div id="formMessage" style="margin-top:10px;color:green;"></div>
+        </section>
+    </div>
+    <footer>
+        &copy; 2025 Dog Food Portfolio. All rights reserved.
+    </footer>
+    <script>
+        // Sample product data
+        const products = [
+            {
+                name: "Puppy Food",
+                image: "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=400&q=80",
+                description: "Specifically formulated for the nutritional needs of growing dogs, with higher protein and calorie content."
+            },
+            {
+                name: "Kibble",
+                image: "https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=400&q=80",
+                description: "Dry, pellet-shaped dog food, a common and convenient option."
+            },
+            {
+                name: "Homemade Dog Food",
+                image: "https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=400&q=80",
+                description: "Some pet owners prefer to cook for their dogs, providing customized meals."
+            }
+        ];
+
+        // Render products
+        const productList = document.getElementById('product-list');
+        products.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>${product.description}</p>
+                <button onclick="alert('Thank you for your interest!')">Enquire</button>
+            `;
+            productList.appendChild(card);
+        });
+
+        // Contact form handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('formMessage').textContent = "Thank you for contacting us! We'll get back to you soon.";
+            this.reset();
+        });
+    </script>
+</body>
+</html>
